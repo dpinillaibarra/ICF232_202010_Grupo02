@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<STYLE type="text/css">
+	H1 { text-align: center;  color: #636363}
+   </STYLE>
+  <BODY>
+<h1>Gestion de titulacion</h1>
+</br>
+</br>
+
+<style type="text/css">P {text-align: center;}</style>
+<p > Esta pagina esta dirigida a todos los estudiantes de la Universidad Andres bello, que este cursando Proyecto de titulo I ó II</p>
+{% if not user.is_authenticated %}
+
+	<br>
+	<style type="text/css">P {text-align: center;}</style>
+	<p>Para acceder al sistema debes ingresar tus credenciales o registrarte</p>
+	
+{% endif %}
+{% endblock %}

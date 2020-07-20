@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<STYLE type="text/css">
+	H1 { text-align: center; color: #636363}
+   </STYLE>
+  <BODY>
+  <h1>Bienvenido {{user.username}} </h1>
+  <div class="container">
+	  <div class="row mt-5 justify-content-center">
+  {% for curso in cursos %} 
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">{{ curso.sigla }}</h5>
+				<p class="card-text">{{ curso.nombre }} </p>
+				<a href="/curso/{{ curso.sigla }}/" class="card-link">Ir</a>
+			</div>
+		</div>
+  {% endfor %}
+	  </div>
+  </div>
+{% endblock %}
