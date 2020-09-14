@@ -1,5 +1,0 @@
-User: superusuario
-pass: F12lipeq	
-
-User: alumno1
-pass: F12lipeq

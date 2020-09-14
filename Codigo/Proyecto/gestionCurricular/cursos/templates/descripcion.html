@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+
+    <h4> Ingrese la descripcion completa del proyecta que se trabajara dentro de este repositorio.</h4>
+    <br>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar descripcion</button>
+    </form>
+    <br>    	
+    
+{% endblock content %}
+</div>
