@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Curso, CursoFactory, Documento, Rubrica, Descripcion
+from .models import Curso, CursoFactory, MDocumento, MRubrica, Descripcion
 from .forms import DocumentoForma, RubricaForma, DescripcionForma
+from django.http import HttpResponse
+
 
 
 
@@ -83,3 +85,17 @@ def eliminar(request):
 
 
 """(Agarrar ultimo objeto creado)def modificar(request):"""
+
+def home_documentos(request):
+    context = {'file': MDocumento.objects.all()}
+    return render(request, 'documentos_subidos.html', context)
+
+def descargar(request, path):
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb')as fh:
+            response = HttpResponse(fh.read(), context_type = "documento")
+            response['Content-Disposition'] = 'inline;filename='+os.path.basename(file_path)
+            return response
+        
+    raise Http404

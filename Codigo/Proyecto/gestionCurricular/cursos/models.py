@@ -21,16 +21,22 @@ class CursoFactory:
       		    return curso
        	return None
 
-class Documento(models.Model):
+class MDocumento(models.Model):
     titulo = models.CharField(max_length=100)
-    documento = models.FileField(upload_to='documentos/', blank=True, null=True, validators=[validate_file_extension])
+    documento = models.FileField(upload_to='media/', blank=True, null=True, validators=[validate_file_extension])
     comentario = models.TextField(max_length=250, blank=True, null=True)
     upload_at = models.DateTimeField(auto_now_add=True)
 
-class Rubrica(models.Model):
+    def __str__(self):
+        return self.titulo
+
+class MRubrica(models.Model):
     titulo = models.CharField(max_length=100)
     rubrica = models.FileField(upload_to='rubricas/', blank=True, null=True,validators=[validate_file_extension])
     upload_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titulo
 
 class Descripcion(models.Model):
     titulo = models.CharField(max_length=100)

@@ -14,12 +14,13 @@
 
 	<a class="btn btn-primary btn-lg" href="{% url 'upload' %}">Subir archivo</a>
 
-	<!--<a class="btn btn-primary btn-lg" href="{% url 'rubrica' %}">Subir rubrica</a>-->
+	<hr class="my-4">
+	<a class="btn btn-primary btn-lg" href="{% url 'rubrica' %}">Subir rubrica</a>
 
 	<hr class="my-4">
-	<strong> Documentos subidos a la plataforma</strong>
+	
+	<a class="btn btn-secondary" href="{% url 'documentos_subidos' %}">Revisar documentos subidos</a>
 </br>
-	<a href="{{ rubrica.file.url }}">Descargar</a>
 
 
 

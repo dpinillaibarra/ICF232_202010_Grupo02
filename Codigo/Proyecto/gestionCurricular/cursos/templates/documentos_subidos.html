@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+
+    <h3> En esta seccion se mostraran los documentos subidos a la pagina.</h3>
+
+    <br>
+    
+    <table>
+        <tr>
+            <td><strong>Nombre</strong></td>
+            <td><strong>Comentario</strong></td>
+            <td><strong>Opciones</strong></td>
+        </tr>
+
+        {% for post in file %}
+
+        {% if post.documento %}
+        <tr>
+            <td>{{ post.titulo }}</td>
+            <td>{{ post.comentario }}</td>
+            <td>
+                <a href="{{ post.documento.url }}" download="{{ post.documento.url }}">Descargar</a>
+            </td>
+        </tr>
+        
+        {% else %}
+        <td></td>
+
+        {% endif %}
+
+        {% endfor %}
+    </table>
+
+</div>
+
+{% endblock content %}

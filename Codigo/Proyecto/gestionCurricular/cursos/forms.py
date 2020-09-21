@@ -1,9 +1,9 @@
 from django import forms
-from .models import Documento, Rubrica, Descripcion
+from .models import MDocumento, MRubrica, Descripcion
 
 class DocumentoForma(forms.ModelForm):
     class Meta:
-        model = Documento
+        model = MDocumento
         fields = ('titulo',
                   'documento',
                   'comentario')
@@ -16,7 +16,7 @@ class DocumentoForma(forms.ModelForm):
 
 class RubricaForma(forms.ModelForm):
     class Meta:
-        model = Rubrica
+        model = MRubrica
         fields = ('titulo',
                   'rubrica')
         widgets = {
