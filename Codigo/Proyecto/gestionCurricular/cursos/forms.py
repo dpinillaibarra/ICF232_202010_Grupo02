@@ -1,5 +1,6 @@
 from django import forms
-from .models import MDocumento, MRubrica, Descripcion
+from django.forms import ModelForm
+from .models import MDocumento, MRubrica, Descripcion, Tarea
 
 class DocumentoForma(forms.ModelForm):
     class Meta:
@@ -36,3 +37,17 @@ class DescripcionForma(forms.ModelForm):
                 attrs={'class':'form-control','rows':'4','placeholder': 'Descripción del proyecto'}),
         }
 
+class TareaForma(forms.ModelForm):
+    class Meta:
+        model = Tarea
+        fields = ('nombre',
+            	  'descripcion',
+                  'exigencia',
+                  'nota')
+        widgets = {
+            'nombre': forms.TextInput(
+                attrs={'class':'form-control','rows':'1','placeholder': 'Ingrese nombre de la nueva entrega'}),
+            'descripcion': forms.Textarea(
+                attrs={'class':'form-control','rows':'4','placeholder': 'Ingrese detalle de la nueva entrega'}),
+
+        }

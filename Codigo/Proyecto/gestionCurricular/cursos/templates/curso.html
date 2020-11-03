@@ -3,29 +3,25 @@
 {% block content %}
 <div class="jumbotron">
 	<h1 class="display-4">{{ curso.sigla }}</h1>
-	<p class="lead">{{ curso.nombre }}</p>
+	<p class="lead">{{ curso.nombre }} <a  href="{% url 'proyecto' %}"> <strong>[Revisar Proyecto]</strong></a> </p> 
 	<h4 style="width: 40rem;"> En este repositorio debera ir subiendo los avances de su Proyecto de Titulo.</h4>
 	<br>
 	<p> Estos seran revisados por su profesor guia, el cual le ira dejando comentarios con respecto a su avance.</p>
 	<hr class="my-4">
-
-	<a class="btn btn-secondary" href="{% url 'proyecto' %}">Revisar Proyecto</a>
-	<hr class="my-4">
-
-	<a class="btn btn-primary btn-lg" href="{% url 'upload' %}">Subir archivo</a>
+	<a class="btn btn-primary btn-sl" href="{% url 'upload' %}">Subir archivo</a>
 
 	<hr class="my-4">
-	<a class="btn btn-primary btn-lg" href="{% url 'rubrica' %}">Subir rubrica</a>
+	<!--<a class="btn btn-primary btn-lg" href="{% url 'rubrica' %}">Subir rubrica</a>
 
-	<hr class="my-4">
+	<hr class="my-4">-->
 	
-	<a class="btn btn-secondary" href="{% url 'documentos_subidos' %}">Revisar documentos subidos</a>
+	<a class="btn btn-primary btn-sl" href="{% url 'documentos_subidos' %}">Revisar documentos subidos</a>
+
+	<hr class="my-4">
+
 </br>
-
-
-
 <br>
 <br>
-	<p><a href="{% url 'cursos' %}">Volver</a></p>	
+	<strong><a href="{% url 'cursos' %}" >← Volver</a></strong>	
 </div>
 {% endblock %}

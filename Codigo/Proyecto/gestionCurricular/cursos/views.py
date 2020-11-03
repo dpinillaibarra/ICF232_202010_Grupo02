@@ -1,9 +1,14 @@
+import os
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView, TemplateView)
+from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Curso, CursoFactory, MDocumento, MRubrica, Descripcion
-from .forms import DocumentoForma, RubricaForma, DescripcionForma
-from django.http import HttpResponse
+from .models import Curso, CursoFactory, MDocumento, MRubrica, Descripcion, Tarea
+from .forms import DocumentoForma, RubricaForma, DescripcionForma, TareaForma
+from django.http import HttpResponse, Http404
+from django.db.models import Avg
 
 
 
@@ -51,7 +56,7 @@ def Modelo_Form_Rubrica(request):
 
 def Modelo_Form_Descripcion(request):
     form = DescripcionForma()
-    
+   
     if request.method == 'POST':
         form = DescripcionForma(request.POST)
         if form.is_valid():
@@ -63,14 +68,30 @@ def Modelo_Form_Descripcion(request):
     return render(request, 'descripcion.html', {
         'form': form
     })
-"""
-def Modelo_Form_Descripcion(request):
-    mod_descripcion = Descripcion.objects.all()
-    data = {
-        'form':mod_descripcion(instancia=mod_descripcion)
-    }
-    return render(request, 'descripcion.html', data)
-"""
+
+def eliminar(request):
+    eliminar_desc = Descripcion.objects.last()
+    eliminar_desc.delete()
+    return redirect(to="proyecto")
+
+def EditarDescripcion(request,id):
+    desc_form = None
+    error = None
+    try:
+        desc = Descripcion.objects.get(id=id)
+
+        if request.method == 'GET':
+            desc_form = DescripcionForma(instance = desc)
+        else:
+            desc_form = DescripcionForma(request.POST, instance = desc)
+            if desc_form.is_valid():
+                desc_form.save()
+            return redirect ('curso')
+    except ObjectDoesNotExist as e:
+        error  = e
+
+    return render(request, 'descripcion.html',{'desc_form':desc_form, 'error':error})
+
 def nueva_descripcion(request):
     nueva_desc = Descripcion.objects.last()
     data = {
@@ -78,17 +99,54 @@ def nueva_descripcion(request):
     }
     return render(request, 'proyecto.html', data)
 
-def eliminar(request):
-    eliminar_desc = Descripcion.objects.last()
-    eliminar_desc.delete()
-    return redirect(to="proyecto")
-
-
-"""(Agarrar ultimo objeto creado)def modificar(request):"""
 
 def home_documentos(request):
-    context = {'file': MDocumento.objects.all()}
+    context = {
+        'file': MDocumento.objects.all()
+    }
     return render(request, 'documentos_subidos.html', context)
+
+def nueva_tarea(request):
+    data = {
+        'form':TareaForma()
+    }
+
+    if request.method == 'POST':
+        formulario = TareaForma(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+
+    return render(request, 'anadir_tarea.html', data)
+
+def home_calificaciones(request):
+    tareas = Tarea.objects.all()
+    average = tareas.aggregate(Avg("nota"))["nota__avg"]
+    print(average)
+    data = {
+        'tareas':tareas,
+        'average':average
+    }
+    return render(request, 'calificaciones.html', data)
+
+def modificar_tarea(request, id):
+    tarea = Tarea.objects.get(id=id)
+    data = {
+        'form':TareaForma(instance=tarea)
+    }
+
+    if request.method == 'POST':
+        formulario = TareaForma(data=request.POST, instance=tarea)
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje'] = "Modificado correctamente"
+            data['form'] = formulario
+    return render(request, 'modificar_tarea.html', data)
+
+def eliminar_tarea(request, id):
+    tarea = Tarea.objects.get(id=id)
+    tarea.delete()
+
+    return redirect(to="calificaciones")
 
 def descargar(request, path):
     file_path = os.path.join(settings.MEDIA_ROOT, path)
@@ -99,3 +157,4 @@ def descargar(request, path):
             return response
         
     raise Http404
+

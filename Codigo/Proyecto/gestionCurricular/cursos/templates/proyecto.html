@@ -3,21 +3,39 @@
 {% block content %}
 
 <div class="jumbotron">
+    <!--  
     <table>
-        <tr>
-            <th>Titulo</th>
-            <th>Descripcion</th>
-            <th>Opciones</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>Opciones</th>
+            </tr>
        
-        <tr>
-            <td>{{ nueva_desc.titulo }}</td>
-            <td>{{ nueva_desc.descripcion }}</td>
-            <td>
-                <a href="{% url 'descripcion' %}">Modificar</a>
-                <a href="{% url 'eliminar' %}">Eliminar</a>
-            </td>
-        </tr>
-    </table>
+            <tr>
+                <td>{{ nueva_desc.titulo }}</td>
+                <td>{{ nueva_desc.descripcion }}</td>
+                <td>
+                    <a href="{% url 'descripcion' %}">Modificar</a>
+                    <a href="{% url 'eliminar' %}">Eliminar</a>
+                </td>
+            </tr>
+        <thead>
+    </table>-->
+
+    <h3> Titulo </h3>
+    <p> {{ nueva_desc.titulo }}</p>
+    
+    <br>
+
+    <h3> Descripcion </h3>
+    <p> {{ nueva_desc.descripcion }} </p>
+
+    <br>
+    <br>
+
+    <a href="{% url 'descripcion' %}" class="btn btn-success">Modificar</a>
+    <a href="{% url 'eliminar' %}" class="btn btn-outline-secondary">Eliminar</a>
+   
 </div>
 {% endblock content %}

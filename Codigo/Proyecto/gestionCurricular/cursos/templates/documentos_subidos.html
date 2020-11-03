@@ -3,18 +3,21 @@
 {% block content %}
 
 <div class="jumbotron">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <h2><li class="breadcrumb-item active" aria-current="page">Documentos</li></h2>
+        </ol>
+    </nav>
 
-    <h3> En esta seccion se mostraran los documentos subidos a la pagina.</h3>
-
-    <br>
-    
-    <table>
-        <tr>
-            <td><strong>Nombre</strong></td>
-            <td><strong>Comentario</strong></td>
-            <td><strong>Opciones</strong></td>
-        </tr>
-
+    <h4 class="mb-3">Lista de documentos</h4>
+    <table >
+        <thead>
+            <tr>
+                <th><strong>Nombre</strong></th>
+                <th><strong>Comentario</strong></th>
+                <th><strong>Opciones</strong></th>
+            </tr>
+        <thead>
         {% for post in file %}
 
         {% if post.documento %}
@@ -30,6 +33,11 @@
         <td></td>
 
         {% endif %}
+
+        {% empty %}
+        <tr>
+          <td class="bg-light text-center font-italic" colspan="5">No se han subido archivos a la pagina por el momento.</td>
+        </tr>
 
         {% endfor %}
     </table>

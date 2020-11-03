@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/curso/ICF333">Curso</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Modificar tarea</li>
+  </ol>
+</nav>
+
+<h2 class="mb-3">Modificar tarea</h2>
+<div class="row">
+  <div class="col-md-6 col-sm-8 col-12">
+    <form action="" method="POST">
+      <table>
+        {% csrf_token %}
+        {{ form.as_table }}   
+      </table>
+    
+      <br>
+      <input type="reset" value="Limpiar" class="btn btn-success">
+      <input type="submit" value="Modificar" class="btn btn-outline-secondary" to="calificaciones">
+    
+    </form>
+  </div>
+</div>
+
+{% endblock %}

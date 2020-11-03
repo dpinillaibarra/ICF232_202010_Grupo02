@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Calificaciones</li>
+  </ol>
+</nav>
+
+<h4 class="mb-3">Lista de test</h4>
+<a class="btn btn-primary mb-3" href="{% url 'anadir_tarea' %}" >Añadir tarea</a>
+<div class="card">
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Tarea</th>
+        <!--<th>Descripcion</th>-->
+        <th>Exigencia</th>
+        <th>Nota</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in tareas %}
+        <tr>
+          <td class="align-middle">{{ p.nombre }}</td>
+          <!--<td class="align-middle">{{ p.descripcion }}</td>-->
+          <td class="align-middle">{{ p.exigencia }}%</td>
+          <td class="align-middle">{{ p.nota }}</td>
+          <td>
+            <a href="{% url 'modificar_tarea' p.id %}">Modificar</a>
+           <a href="{% url 'eliminar_tarea' p.id %}">Eliminar</a>
+          </td>
+        </tr>
+        {% empty %}        
+        <tr>
+          <td class="bg-light text-center font-italic" colspan="5">Aún no se a creado ninguna entrega.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+<strong>Promedio = {{ average }}</strong>
+{% endblock content %}

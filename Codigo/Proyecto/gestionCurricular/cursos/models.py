@@ -42,3 +42,14 @@ class Descripcion(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=400, blank=True, null=True)
     upload_at = models.DateTimeField(auto_now_add=True)
+
+class Tarea(models.Model):
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField(max_length=150, blank=True, null=True)
+    exigencia = models.IntegerField(verbose_name="Exigencia")
+    nota = models.IntegerField(verbose_name="Nota")
+    promedio = models.IntegerField(verbose_name="Promedio", default=0)
+
+    def __str__(self):
+        return self.nombre
+
