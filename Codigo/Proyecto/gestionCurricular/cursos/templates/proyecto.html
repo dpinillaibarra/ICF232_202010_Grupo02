@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="jumbotron">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Proyecto</li>
+    </ol>
+  </nav>
+<div class="card">
     <!--  
     <table>
         <thead>
@@ -35,7 +39,6 @@
     <br>
 
     <a href="{% url 'descripcion' %}" class="btn btn-success">Modificar</a>
-    <a href="{% url 'eliminar' %}" class="btn btn-outline-secondary">Eliminar</a>
    
 </div>
 {% endblock content %}

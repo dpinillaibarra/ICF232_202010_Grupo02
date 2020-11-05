@@ -1,47 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="jumbotron">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <h2><li class="breadcrumb-item active" aria-current="page">Documentos</li></h2>
-        </ol>
-    </nav>
-
-    <h4 class="mb-3">Lista de documentos</h4>
-    <table >
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Documentos</li>
+    </ol>
+</nav>
+<h4 class="mb-3">Lista de documentos</h4>
+<div class="card">
+    <table class="table mb-0">
         <thead>
             <tr>
-                <th><strong>Nombre</strong></th>
-                <th><strong>Comentario</strong></th>
-                <th><strong>Opciones</strong></th>
+                <td><strong>Nombre</strong></td>
+                <td><strong>Comentario</strong></td>
+                <td><strong>Opciones</strong></td>
             </tr>
-        <thead>
-        {% for post in file %}
+        </thead>
+        <tbody>
+            {% for post in file %}
 
-        {% if post.documento %}
-        <tr>
-            <td>{{ post.titulo }}</td>
-            <td>{{ post.comentario }}</td>
-            <td>
-                <a href="{{ post.documento.url }}" download="{{ post.documento.url }}">Descargar</a>
-            </td>
-        </tr>
-        
-        {% else %}
-        <td></td>
+            {% if post.documento %}
+            <tr>
+                <td>{{ post.titulo }}</td>
+                <td>{{ post.comentario }}</td>
+                <td>
+                    <a href="{{ post.documento.url }}" download="{{ post.documento.url }}">Descargar</a>
+                    <a href="{% url 'eliminar_documento' post.id %}">Eliminar</a>
+                </td>
+            </tr>
+            
+            {% else %}
+            
+            {% endif %}  
 
-        {% endif %}
-
-        {% empty %}
-        <tr>
-          <td class="bg-light text-center font-italic" colspan="5">No se han subido archivos a la pagina por el momento.</td>
-        </tr>
-
-        {% endfor %}
+            {% empty %}
+            <tr>
+                <td class="bg-light text-center font-italic" colspan="5">Aun no se han subido archivos al sistema</td>
+            </tr>   
+            {% endfor %}
+        </tbody>
     </table>
-
 </div>
 
 {% endblock content %}

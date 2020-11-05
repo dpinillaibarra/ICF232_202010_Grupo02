@@ -1,25 +1,25 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from .validators import validate_file_extension
-from django.utils.safestring import mark_safe
 
 class Curso:
     def __init__(self, sigla, nombre):
-    	self.sigla = sigla
-    	self.nombre = nombre
+        self.sigla = sigla
+        self.nombre = nombre
 
 class CursoFactory:
     def __init__(self):
-    	self.cursos = []
-    	self.cursos.append(Curso("ICF333", "Repositorio: Proyecto Titulo I "))
+        self.cursos = []
+        self.cursos.append(Curso("ICF333", "Repositorio: Proyecto Titulo I "))
 
     def obtenerCursos(self):
         return self.cursos
 
     def getCurso(self, sigla):
-       	for curso in self.cursos:
-       		if curso.sigla == sigla:
-      		    return curso
-       	return None
+        for curso in self.cursos:
+            if curso.sigla == sigla:
+                return curso
+        return None
 
 class MDocumento(models.Model):
     titulo = models.CharField(max_length=100)
@@ -48,7 +48,7 @@ class Tarea(models.Model):
     descripcion = models.TextField(max_length=150, blank=True, null=True)
     exigencia = models.IntegerField(verbose_name="Exigencia")
     nota = models.IntegerField(verbose_name="Nota")
-    promedio = models.IntegerField(verbose_name="Promedio", default=0)
+    promedio = models.FloatField(verbose_name="Promedio", default=0)
 
     def __str__(self):
         return self.nombre

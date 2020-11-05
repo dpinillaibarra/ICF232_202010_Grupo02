@@ -5,12 +5,9 @@
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% if error %}
-            <h2>{{ error }} </h2>
-        {% else %}
-            {{ form.as_p }}
-            <button type="submit">Guardar descripcion</button>
-        {% endif %}
+        {{ form.as_p }}
+        <input type="reset" value="Limpiar" class="btn btn-outline-secondary">
+        <input type="submit" value="Modificar" class="btn btn-success" to="proyecto">
     </form>
     <br>    	
 </div>

@@ -7,3 +7,4 @@ def validate_file_extension(value):
     valid_extensions = ['.pdf', '.doc', '.docx','.xls','.xlsx','.jpg']
     if not ext.lower() in valid_extensions:
         raise ValidationError(u'Tipo de archivo no soportado.')
+    

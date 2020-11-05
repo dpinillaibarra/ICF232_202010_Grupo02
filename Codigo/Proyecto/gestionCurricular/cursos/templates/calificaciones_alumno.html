@@ -8,7 +8,6 @@
 </nav>
 
 <h4 class="mb-3">Lista de test</h4>
-<a class="btn btn-primary mb-3" href="{% url 'anadir_tarea' %}" >Añadir tarea</a>
 <div class="card">
   <table class="table mb-0">
     <thead>
@@ -17,8 +16,7 @@
         <th>Descripcion</th>
         <th>Exigencia</th>
         <th>Nota</th>
-        <th>Archivo cargado</th>
-        <th>Opciones</th>
+        <th>Archivo</th>
       </tr>
     </thead>
     <tbody>
@@ -29,22 +27,17 @@
           <td class="align-middle">{{ p.exigencia }}%</td>
           <td class="align-middle">{{ p.nota }}</td>
           <td>
-            <a href="{% url 'documentos_subidos' %}">Archivo subido</a>
-          </td>
-          <td>
-            <a href="{% url 'modificar_tarea' p.id %}">Modificar</a>
-            <a href="{% url 'eliminar_tarea' p.id %}">Eliminar</a>
+            <a href="{% url 'upload'  %}">Subir archivo</a>
           </td>
         </tr>
         {% empty %}        
         <tr>
-          <td class="bg-light text-center font-italic" colspan="10">Aún no se a creado ninguna entrega.</td>
+          <td class="bg-light text-center font-italic" colspan="10">Aún no se a cargado ninguna tarea.</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
-<br>
 
 {% if average == 0 %}
 <p> </p>
@@ -53,5 +46,6 @@
 <strong> Promedio = {{ average }}</strong>
 
 {% endif %}
+
 
 {% endblock content %}

@@ -74,23 +74,17 @@ def eliminar(request):
     eliminar_desc.delete()
     return redirect(to="proyecto")
 
-def EditarDescripcion(request,id):
-    desc_form = None
-    error = None
-    try:
-        desc = Descripcion.objects.get(id=id)
-
-        if request.method == 'GET':
-            desc_form = DescripcionForma(instance = desc)
-        else:
-            desc_form = DescripcionForma(request.POST, instance = desc)
-            if desc_form.is_valid():
-                desc_form.save()
-            return redirect ('curso')
-    except ObjectDoesNotExist as e:
-        error  = e
-
-    return render(request, 'descripcion.html',{'desc_form':desc_form, 'error':error})
+def EditarDescripcion(request):
+    desc = Descripcion.objects.last()
+    data = {
+        'form':DescripcionForma(instance=desc)
+    }
+    if request.method == 'POST':
+        desc_form = DescripcionForma(data=request.POST, instance=desc)
+        if desc_form.is_valid():
+            desc_form.save()
+            data['form'] = desc_form
+    return render(request, 'descripcion.html', data)
 
 def nueva_descripcion(request):
     nueva_desc = Descripcion.objects.last()
@@ -99,29 +93,41 @@ def nueva_descripcion(request):
     }
     return render(request, 'proyecto.html', data)
 
-
 def home_documentos(request):
     context = {
         'file': MDocumento.objects.all()
     }
     return render(request, 'documentos_subidos.html', context)
 
+def eliminar_documento(request, id):
+    documento = MDocumento.objects.get(id=id)
+    documento.delete()
+
+    return redirect(to="documentos_subidos")
+
 def nueva_tarea(request):
     data = {
         'form':TareaForma()
     }
-
     if request.method == 'POST':
         formulario = TareaForma(request.POST)
         if formulario.is_valid():
             formulario.save()
+            data['mensaje'] = "Tarea creada correctamente"
 
     return render(request, 'anadir_tarea.html', data)
 
 def home_calificaciones(request):
     tareas = Tarea.objects.all()
     average = tareas.aggregate(Avg("nota"))["nota__avg"]
+
+    if average is None:
+        average = 0
+
+    average = round(average, 2)
+
     print(average)
+
     data = {
         'tareas':tareas,
         'average':average
@@ -133,7 +139,6 @@ def modificar_tarea(request, id):
     data = {
         'form':TareaForma(instance=tarea)
     }
-
     if request.method == 'POST':
         formulario = TareaForma(data=request.POST, instance=tarea)
         if formulario.is_valid():
@@ -147,6 +152,21 @@ def eliminar_tarea(request, id):
     tarea.delete()
 
     return redirect(to="calificaciones")
+
+def home_calificaciones_alumno(request):
+    tareas = Tarea.objects.all()
+    average = tareas.aggregate(Avg("nota"))["nota__avg"]
+
+    if average is None:
+        average = 0
+
+    average = round(average, 2)
+
+    data = {
+        'tareas':tareas,
+        'average':average
+    }
+    return render(request, 'calificaciones_alumno.html', data )
 
 def descargar(request, path):
     file_path = os.path.join(settings.MEDIA_ROOT, path)
