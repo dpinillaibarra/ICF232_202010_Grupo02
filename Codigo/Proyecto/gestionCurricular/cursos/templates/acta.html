@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <table>
+        <tr>
+            <th> Profesor guia </th>
+            
+            <th> Profesor invitado </th>
+            
+            <th> Profesor invitado </th>
+            
+            <th> Alumno </th>
+
+            <th> Rut Alumno </th>
+
+            <th> Hora </th>
+        </tr>
+    
+        {% for p in profesores %}
+    
+        <tr>
+            <td> {{ p.Profesor_guia }}</td>
+            <td> {{ p.Profesor_invitado_1 }}</td>
+            <td> {{ p.Profesor_invitado_2 }}</td>
+            <td> {{ p.Alumno }}</td>
+            <td> {{ p.Rut_Alumno }}</td>
+            <td> {{ p.upload_at}}</td>
+        </tr>   
+    {% endfor %}
+    
+    </table>
+</div>
+<br>
+<strong>{{ mensaje }}</strong>
+
+{% endblock %}

@@ -53,3 +53,10 @@ class Tarea(models.Model):
     def __str__(self):
         return self.nombre
 
+class ActaFirmas(models.Model):
+    Profesor_guia = models.CharField(max_length=50) 
+    Profesor_invitado_1 = models.CharField(max_length=50) 
+    Profesor_invitado_2 = models.CharField(max_length=50)
+    Alumno = models.CharField(max_length=50)
+    Rut_Alumno = models.CharField(max_length=50)
+    upload_at = models.DateTimeField(auto_now_add=True)

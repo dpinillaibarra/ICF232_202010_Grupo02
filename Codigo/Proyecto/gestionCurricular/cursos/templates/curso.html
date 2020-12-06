@@ -9,14 +9,26 @@
 	<p class="bg text-center font-italic"> Estos seran revisados por su profesor guia, el cual le ira dejando comentarios con respecto a su avance.</p>
 	<hr class="my-4">
 	<!--<a class="btn btn-primary btn-sl" href="{% url 'upload' %}">Subir archivo</a>-->
-	<!--<a class="btn btn-primary btn-lg" href="{% url 'rubrica' %}">Subir rubrica</a>
+	<a class="btn btn-primary btn-lg" href="{% url 'rubrica' %}">Subir rubrica</a>
 
-	<hr class="my-4">-->
+	<hr class="my-4">
 	
 	<!--<a class="btn btn-primary btn-sl" href="{% url 'documentos_subidos' %}">Revisar documentos subidos</a>-->
 
+	<strong> Para poder aprobar/firmar la Acta de aprobacion de Cierre, hacer clic en el siguiente botón. </strong>
+	<br>
+	<br>
+	<a class="btn btn-primary btn-lg" href="{% url 'acta_cierre' %}"> Firmar </a>
 </br>
 <br>
+
+	<form action="{% url 'export' %}" method="POST" role="form">
+		{% csrf_token %}
+
+		<button type="submit" class="btn btn-success">
+			<i class="fa fa-download"></i> Generar y descargar acta
+		</button>
+	</form>
 <br>
 	<strong><a href="{% url 'cursos' %}" >← Volver</a></strong>	
 </div>

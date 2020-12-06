@@ -7,7 +7,7 @@ from cursos import views
 from django.views.static import serve
 from .views import (nueva_descripcion, eliminar, home_documentos, home_calificaciones,
                     home_calificaciones_alumno,EditarDescripcion, nueva_tarea, modificar_tarea,
-                    eliminar_tarea, eliminar_documento)
+                    eliminar_tarea, eliminar_documento, Acta, GenerarActa)
 
 urlpatterns = [
     url(r'^$', views.HomePageView.as_view(), name="index"),
@@ -31,6 +31,9 @@ urlpatterns = [
     path('curso/ICF333/anadir_tarea/eliminar_tarea/<id>/', eliminar_tarea, name="eliminar_tarea"),
     path('curso/ICF333/Proyecto/eliminar/', eliminar, name="eliminar"),
     path('curso/ICF333/Proyecto/editar/', EditarDescripcion, name="editar"),
+    path('curso/ICF333/Acta', GenerarActa, name="acta_cierre"),
+    path('curso/ICF333/Profesores', Acta, name="acta" ),
+    path('export', views.cover_export, name="export"),
     url(r'^descargar/(?P<path>.*)$',serve, {'document_root':settings.MEDIA_ROOT}),
 
     

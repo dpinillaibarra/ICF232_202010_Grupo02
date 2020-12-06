@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Acta</li>
+    </ol>
+  </nav>
+
+<h4 class="mb-3"> Acta Aprobacion de cierre</h4>
+<div class="card">
+    <p> Para poder concluir el proceso de cierre del Proyecto del alumno, se debera aprobar el siguiente documento.
+        Este documento debera ser aprobado y firmado, por el profesor guia y los profesores invitados.
+    </p>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <!--<button type="submit" class="btn btn-primary btn-black"> Firmar </button>-->
+        <input type="submit" value="Firmar" class="btn btn-success" >
+    </form>
+</div>
+
+<strong>{{ mensaje }}</strong>
+{% endblock %}

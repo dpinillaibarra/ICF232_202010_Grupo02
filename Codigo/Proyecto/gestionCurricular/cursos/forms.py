@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import MDocumento, MRubrica, Descripcion, Tarea
+from .models import MDocumento, MRubrica, Descripcion, Tarea, ActaFirmas
 
 class DocumentoForma(forms.ModelForm):
     class Meta:
@@ -50,4 +50,25 @@ class TareaForma(forms.ModelForm):
             'descripcion': forms.Textarea(
                 attrs={'class':'form-control','rows':'4','placeholder': 'Ingrese detalle de la nueva entrega'}),
 
+        }
+
+class ActaForma(forms.ModelForm):
+    class Meta:
+        model = ActaFirmas
+        fields = ('Profesor_guia',
+                  'Profesor_invitado_1',
+                  'Profesor_invitado_2',
+                  'Alumno',
+                  'Rut_Alumno')
+        widgets = {
+            'Profesor_guia': forms.TextInput(
+                attrs={'class':'form-control','rows':'1','placeholder': 'Ingrese su nombre'}), 
+            'Profesor_invitado_1': forms.TextInput(
+                attrs={'class':'form-control','rows':'1','placeholder': 'Ingrese nombre profesor invitado'}),
+            'Profesor_invitado_2': forms.TextInput(
+                attrs={'class':'form-control','rows':'1','placeholder': 'Ingrese nombre profesor invitado'}),
+            'Alumno': forms.TextInput(
+                attrs={'class':'form-control','rows':'1','placeholder': 'Ingrese nombre alumno a evaluar'}),
+            'Rut_Alumno': forms.TextInput(
+                attrs={'class':'form-control','rows':'1','placeholder': 'Ingrese rut de alumno a evaluar'}),             
         }
