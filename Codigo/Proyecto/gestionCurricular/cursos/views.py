@@ -315,7 +315,7 @@ def cover_export(request):
     document.add_paragraph(""+ profesores.Profesor_guia +", "+ profesores.upload_at.strftime('%Y-%m-%d %H:%M') +"     ""              " + profesores.Profesor_invitado_1 + ", " + profesores.upload_at.strftime('%Y-%m-%d %H:%M')  + ""     )
     document.add_paragraph("_________________________                ________________________________")
     document.add_paragraph("   Firma Profesor Guía			          Firma Profesor(es) invitado(s)")
-    document.add_paragraph(profesores.upload_at.strftime('%Y-%m-%d %H:%M'))
+
     document.save('Acta_Cierre.docx')
 
 #Guardamos el contenido y descargamos desde la pagina.
